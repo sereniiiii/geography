@@ -66,6 +66,7 @@
     var out = [];
     out.push('<span class="badge type">' + esc(item.type) + '</span>');
     out.push('<span class="badge">' + DIFF_LABEL[item.diff] + '</span>');
+    if (item.exCount) out.push('<span class="badge ex">例 ' + item.exCount + '</span>');
     if (item.custom) out.push('<span class="badge custom">自定义</span>');
     if (item.bookName) out.push('<span class="badge book">' + hl(item.bookName, q) + '</span>');
     out.push(statusBadges(item, user, today));
@@ -94,6 +95,46 @@
     return '<ul>' + (core || []).map(function (c) {
       return '<li>' + esc(c) + '</li>';
     }).join('') + '</ul>';
+  }
+
+  function examplesFor(id) {
+    var all = (global.GG && global.GG.examples) || [];
+    return all.filter(function (e) { return e.item === id; });
+  }
+
+  function exampleHTML(ex, i) {
+    var no = String(i + 1).padStart(2, '0');
+    var asks = (ex.ask || []).map(function (a) { return '<li>' + esc(a) + '</li>'; }).join('');
+    return '' +
+      '<article class="example-card">' +
+        '<div class="ex-head">' +
+          '<span class="ex-no">例 ' + no + '</span>' +
+          '<span class="ex-title">' + esc(ex.title || '') + '</span>' +
+          '<span class="ex-level">' + (DIFF_LABEL[ex.level] || '') + '</span>' +
+        '</div>' +
+        '<p class="ex-src">' + esc(ex.chapter || '') + ' · ' + esc(ex.module || '') + '</p>' +
+        '<p class="ex-stem">' + esc(ex.stem || '') + '</p>' +
+        (asks ? '<ol class="ex-asks">' + asks + '</ol>' : '') +
+        '<button class="btn small ex-toggle" data-ex-toggle aria-expanded="false">' +
+          '<span>显示答案与解析</span><span class="ex-arrow" aria-hidden="true">＋</span>' +
+        '</button>' +
+        '<div class="ex-body" hidden>' +
+          '<div class="ex-block"><span class="ex-label">答案</span><p>' + esc(ex.answer || '') + '</p></div>' +
+          '<div class="ex-block"><span class="ex-label">解析</span><p>' + esc(ex.analysis || '') + '</p></div>' +
+          (ex.hint ? '<div class="ex-block ex-hint-block"><span class="ex-label">思路</span><p>' + esc(ex.hint) + '</p></div>' : '') +
+        '</div>' +
+      '</article>';
+  }
+
+  function examplesSection(item) {
+    var exs = examplesFor(item.id);
+    if (!exs.length) return '';
+    return '<section class="detail-section ex-section">' +
+      '<h3>例题 <span class="ex-count">' + exs.length + '</span></h3>' +
+      '<p class="ex-intro">按书中题型自编的同型题，先独立作答，再展开答案与解析。</p>' +
+      '<div class="example-list">' + exs.map(exampleHTML).join('') + '</div>' +
+      '<p class="ex-credit">题型参考《一地·高考地理核心方法必刷100讲》（2027版）；题干与解析为本站自编，非原题照录。</p>' +
+    '</section>';
   }
 
   function detailHTML(item, user, opts) {
@@ -137,6 +178,8 @@
 
       (item.exam ?
         '<section class="detail-section"><h3>考法</h3><div class="exam-box">' + esc(item.exam) + '</div></section>' : '') +
+
+      examplesSection(item) +
 
       ((item.terms && item.terms.length) ?
         '<section class="detail-section"><h3>关键词</h3><div class="kw-row">' +
@@ -224,6 +267,20 @@
     root.querySelectorAll('[data-related]').forEach(function (b) {
       b.addEventListener('click', function () {
         hooks.openRelated && hooks.openRelated(b.getAttribute('data-related'));
+      });
+    });
+
+    root.querySelectorAll('[data-ex-toggle]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var body = btn.parentElement.querySelector('.ex-body');
+        if (!body) return;
+        var open = body.hidden;
+        body.hidden = !open;
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        var label = btn.querySelector('span');
+        var arrow = btn.querySelector('.ex-arrow');
+        if (label) label.textContent = open ? '收起答案与解析' : '显示答案与解析';
+        if (arrow) arrow.textContent = open ? '－' : '＋';
       });
     });
 

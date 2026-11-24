@@ -110,7 +110,7 @@
   function haystack(it) {
     return [
       it.title, it.summary, it.bookTitle, it.bookName, it.lessonTitle, it.unitTitle,
-      (it.core || []).join(' '), it.pitfall || '', it.exam || '', (it.terms || []).join(' '),
+      (it.core || []).join(' '), it.pitfall || '', it.exam || '', it.exSearch || '', (it.terms || []).join(' '),
       (user.notes[it.id] && user.notes[it.id].text) || ''
     ].join(' ').toLowerCase();
   }
@@ -192,7 +192,8 @@
 
     var d0 = new Date();
     $('#heroDate').textContent = d0.getFullYear() + '.' + pad(d0.getMonth() + 1) + '.' + pad(d0.getDate());
-    $('#heroCount').textContent = items.length + ' 条考点';
+    $('#heroCount').textContent = items.length + ' 条考点' +
+      (GG.meta && GG.meta.exampleCount ? ' · ' + GG.meta.exampleCount + ' 道例题' : '');
 
     var last = user.config && user.config.lastBackup;
     var info = $('#backupInfo'), warn = $('#backupWarn');
@@ -1008,7 +1009,7 @@
   /* ---------- 帮助 ---------- */
   function openHelp() {
     var body = '' +
-      '<div class="info-note">五本书（必修一、二 + 选必一、二、三）共 65 课，拆成 139 条考点卡。内容为归纳性表述，不标教材页码；没有把握的表述只写考点归纳，不冒充原文。</div>' +
+      '<div class="info-note">五本书（必修一、二 + 选必一、二、三）共 65 课，拆成 139 条考点卡，并配 60 道同型例题。内容为归纳性表述，不标教材页码；例题按题型结构自编，不照录原书题目。</div>' +
       '<h4 style="margin:14px 0 6px">键盘</h4>' +
       '<table class="shortcut-table">' +
       '<tr><td>搜索</td><td><kbd>/</kbd></td></tr>' +
@@ -1021,6 +1022,7 @@
       '<div class="row"><span><span class="badge ok">已掌握</span> 松绿</span><span class="snap-meta">能复述并能做题</span></div>' +
       '<div class="row"><span><span class="badge warn">待复习</span> 赭石</span><span class="snap-meta">有印象但不稳</span></div>' +
       '<div class="row"><span><span class="badge today">今日已复习</span> 海蓝</span><span class="snap-meta">今天过了一遍</span></div>' +
+      '<div class="row"><span><span class="badge ex">例 1</span> 例题</span><span class="snap-meta">详情页可展开答案与解析</span></div>' +
       '<div class="row"><span><span class="badge">未标记</span> 灰</span><span class="snap-meta">还没判断</span></div>' +
       '</div>' +
       '<h4 style="margin:14px 0 6px">数据</h4>' +
