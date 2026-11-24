@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>地理知识库 · 高中地理考点</title>
+<meta name="description" content="高中地理考点速查：五本书六十五课，章节树、检索、笔记、掌握状态、复习记录、独立详情页、地理学时间线与一键备份，纯静态可离线。">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="地理知识库">
+<meta property="og:title" content="地理知识库 · 高中地理考点">
+<meta property="og:description" content="五本书六十五课一百三十九条考点：章节树、检索、笔记、掌握状态、复习记录与离线备份。">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#f2f1ea">
+<script>(function(){try{var t=localStorage.getItem("gg.theme");if(!t){t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}document.documentElement.dataset.theme=t}catch(e){}})();</script>
+<link rel="stylesheet" href="assets/css/site.css?v=20261124c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='13' fill='%23125a70'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='serif' font-size='34' fill='%23f5fcfd'%3E%E5%9C%B0%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip-link" href="#listViewport">跳到考点列表</a>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">地</span>
+    <div class="brand-text">
+      <strong>地理知识库</strong>
+      <span id="brandSub">高中地理 · 五本书</span>
+    </div>
+  </div>
+
+  <div class="searchbox" role="search">
+    <span class="search-icon" aria-hidden="true">⌕</span>
+    <input id="searchInput" type="search" autocomplete="off" spellcheck="false" placeholder="搜考点、地名、笔记…" aria-label="全局搜索">
+    <kbd id="searchKbd">/</kbd>
+    <button id="searchClear" class="icon-btn" title="清空搜索" aria-label="清空搜索" hidden>×</button>
+  </div>
+
+  <div class="topactions">
+    <button id="themeToggle" class="theme-btn" title="切换明暗主题" aria-label="切换明暗主题">◐</button>
+    <a id="timelineBtn" class="btn ghost" href="timeline.html" title="地理学发展年表"><span class="lbl">时间线</span><span class="ico" aria-hidden="true">时</span></a>
+    <button id="dueBtn" class="btn ghost" title="今日待复习"><span class="lbl">待复习</span><span id="dueCount" class="count warn">0</span><span class="ico" aria-hidden="true">复</span></button>
+    <button id="backupBtn" class="btn ghost" title="备份、导出、导入"><span class="lbl">备份</span><span class="ico" aria-hidden="true">备</span></button>
+    <button id="helpBtn" class="icon-btn" title="快捷键与说明" aria-label="快捷键与说明">?</button>
+  </div>
+</header>
+
+<section class="hero" aria-label="学习概览">
+  <svg class="hero-scape" viewBox="0 0 1440 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="seaSky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#041c27"/>
+        <stop offset=".46" stop-color="#0a3749"/>
+        <stop offset=".78" stop-color="#12576c"/>
+        <stop offset="1" stop-color="#0a3546"/>
+      </linearGradient>
+      <linearGradient id="waveA" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#2d7d90" stop-opacity=".72"/>
+        <stop offset="1" stop-color="#0a3546" stop-opacity=".2"/>
+      </linearGradient>
+      <linearGradient id="waveB" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#1a6479" stop-opacity=".82"/>
+        <stop offset="1" stop-color="#062433" stop-opacity=".3"/>
+      </linearGradient>
+      <radialGradient id="dawnSea" cx=".5" cy=".5" r=".5">
+        <stop offset="0" stop-color="#ffe7c2" stop-opacity=".55"/>
+        <stop offset=".55" stop-color="#efd3ae" stop-opacity=".18"/>
+        <stop offset="1" stop-color="#efd3ae" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect width="1440" height="260" fill="url(#seaSky)"/>
+    <circle cx="1086" cy="46" r="210" fill="url(#dawnSea)"/>
+    <path d="M0 132 L112 106 L204 128 L318 92 L430 126 L548 100 L650 130 L770 104 L884 134 L1000 108 L1118 132 L1240 104 L1348 128 L1440 114 L1440 260 L0 260Z" fill="#0d4154" opacity=".55"/>
+    <path d="M0 160 C120 142 210 174 330 156 C452 138 540 170 664 154 C790 138 880 168 1000 152 C1120 136 1210 166 1330 150 C1380 143 1410 146 1440 150 L1440 260 L0 260Z" fill="url(#waveA)"/>
+    <path d="M0 194 C92 176 192 208 306 190 C420 172 512 204 630 188 C748 172 846 204 964 188 C1082 172 1180 202 1296 186 C1360 178 1408 184 1440 188 L1440 260 L0 260Z" fill="url(#waveB)"/>
+    <path d="M0 226 C140 212 248 236 386 224 C524 212 622 238 762 226 C902 214 1006 238 1146 226 C1256 217 1352 230 1440 226 L1440 260 L0 260Z" fill="#062433" opacity=".88"/>
+    <g opacity=".18" stroke="#bfe6ee" stroke-width="1" fill="none">
+      <path d="M40 176 C200 160 300 190 460 176"/>
+      <path d="M40 186 C200 170 300 200 460 186"/>
+      <path d="M40 196 C200 180 300 210 460 196"/>
+      <path d="M980 176 C1120 162 1240 186 1400 172"/>
+      <path d="M980 186 C1120 172 1240 196 1400 182"/>
+      <path d="M980 196 C1120 182 1240 206 1400 192"/>
+    </g>
+    <g opacity=".22" stroke="#e8f6f8" stroke-width="1">
+      <path d="M1180 96 L1188 118 M1180 96 L1172 118 M1180 96 L1198 104 M1180 96 L1162 104" fill="none"/>
+    </g>
+  </svg>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <p class="hero-eyebrow">GEOGRAPHY ATLAS · 高中地理</p>
+      <h1>把山川与人世，读成<em>一张图</em></h1>
+      <p class="hero-lede">五本书、六十五课，一百三十九条考点拆成可检索的卡片；自然过程、人文区位与区域安全，都能回到它所在的章节。</p>
+      <div class="hero-meta">
+        <span id="heroDate">2026.11.24</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span>5 本书 · 65 课</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span id="heroCount">139 条考点</span>
+      </div>
+    </div>
+    <div class="hero-metrics" aria-label="学习数据">
+      <div class="metric accent"><span class="metric-label">考点</span><div class="metric-value"><strong id="heroTotal">0</strong><small>条</small></div></div>
+      <div class="metric"><span class="metric-label">已掌握</span><div class="metric-value"><strong id="heroMastered">0</strong><small>条</small></div></div>
+      <div class="metric"><span class="metric-label">今日待复习</span><div class="metric-value"><strong id="heroDue">0</strong><small>条</small></div></div>
+      <div class="metric"><span class="metric-label">今日已复习</span><div class="metric-value"><strong id="heroToday">0</strong><small>条</small></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="layout" id="app">
+  <aside class="pane left-pane" id="leftPane" aria-label="章节树与筛选">
+    <div class="pane-head">
+      <h2 id="leftPaneTitle">章节树</h2>
+      <button id="collapseAll" class="link-btn">收起全部</button>
+    </div>
+
+    <div class="filters">
+      <label class="field"><span>类型</span>
+        <select id="filterType">
+          <option value="all">全部</option>
+          <option>概念</option><option>规律</option><option>过程</option>
+          <option>对比</option><option>方法</option><option>区域</option><option>安全</option>
+        </select>
+      </label>
+      <label class="field"><span>难度</span>
+        <select id="filterDiff">
+          <option value="0">全部</option><option value="1">Ⅰ 基础</option><option value="2">Ⅱ 常考</option><option value="3">Ⅲ 难点</option>
+        </select>
+      </label>
+      <label class="field"><span>状态</span>
+        <select id="filterStatus">
+          <option value="all">全部</option><option value="mastered">已掌握</option><option value="review">待复习</option><option value="today">今日已复习</option><option value="none">未标记</option>
+        </select>
+      </label>
+      <button id="filterReset" class="link-btn">清除筛选</button>
+    </div>
+
+    <nav id="tree" class="tree" aria-label="教材章节"></nav>
+
+    <div class="pane-foot">
+      <button id="customBtn" class="btn subtle">＋ 自定义考点</button>
+      <button id="reviewBtn" class="btn subtle">复习记录 <span id="reviewCount" class="count">0</span></button>
+    </div>
+  </aside>
+
+  <main class="pane center-pane" id="centerPane" aria-label="考点列表">
+    <nav class="viewbar" id="viewBar" aria-label="视图切换">
+      <button data-view="cards" class="active" aria-pressed="true">考点卡</button>
+      <button data-view="pairs" aria-pressed="false">易混对照</button>
+      <span class="viewbar-hint" id="viewbarHint">章节索引 · 卡片阅读</span>
+    </nav>
+    <div class="home-strip" id="homeStrip">
+      <div class="strip-left">
+        <span id="scopeLabel" class="scope-label">全部考点</span>
+        <span id="scopeSub" class="muted"></span>
+      </div>
+      <div class="strip-right">
+        <span id="backupInfo" class="muted"></span>
+        <span id="backupWarn" class="warn-line" hidden>距上次备份超过七天，建议导出一次</span>
+      </div>
+    </div>
+
+    <div class="center-toolbar" id="centerToolbar">
+      <div class="result-line"><strong id="resultCount">0</strong><span class="muted"> 条</span><span id="searchHint" class="muted"></span></div>
+      <div class="toolbar-actions">
+        <select id="sortSelect" aria-label="排序">
+          <option value="chapter">按章节</option>
+          <option value="difficulty">按难度</option>
+          <option value="status">按状态</option>
+          <option value="title">按标题</option>
+        </select>
+        <button id="viewToggle" class="btn ghost" data-view="browse" hidden>返回浏览</button>
+      </div>
+    </div>
+
+    <div id="pairsView" class="alt-view" hidden aria-label="易混对照"></div>
+
+    <div id="listViewport" class="list-viewport" tabindex="-1">
+      <div id="overview" class="overview"></div>
+      <div id="listCanvas" class="list-canvas"></div>
+      <div id="emptyState" class="empty-state" hidden>
+        <h3>没有匹配的考点</h3>
+        <p class="muted">换个更短的关键词，或清除筛选条件。</p>
+        <div id="nearestList" class="nearest"></div>
+      </div>
+    </div>
+  </main>
+
+  <aside class="pane right-pane" id="rightPane" aria-label="考点详情">
+    <div class="pane-head">
+      <h2 id="rightPaneTitle">考点详情</h2>
+      <button id="closeDetail" class="icon-btn mobile-only" aria-label="关闭详情">×</button>
+    </div>
+    <div id="detailEmpty" class="detail-empty">
+      <div class="empty-glyph" aria-hidden="true">地</div>
+      <p>从左侧章节树或中间列表选一条考点</p>
+      <p class="muted small">键盘 <kbd>J</kbd> / <kbd>K</kbd> 上下切换，<kbd>Enter</kbd> 打开独立页</p>
+    </div>
+    <div id="detailBody" class="detail-body" hidden></div>
+  </aside>
+</div>
+
+<div class="mobile-tabs" role="tablist" aria-label="移动端面板切换">
+  <button data-tab="tree" role="tab" aria-selected="false"><span>目录</span></button>
+  <button data-tab="list" role="tab" aria-selected="true"><span>列表</span></button>
+  <button data-tab="detail" role="tab" aria-selected="false"><span>详情</span></button>
+</div>
+
+<div id="drawerScrim" class="scrim" hidden></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<div id="modalRoot" class="modal-root" hidden></div>
+
+<script src="data/content.js?v=20261124c"></script>
+<script src="data/views.js?v=20261124c"></script>
+<script src="assets/js/store.js?v=20261124c"></script>
+<script src="assets/js/render.js?v=20261124c"></script>
+<script src="assets/js/app.js?v=20261124c"></script>
+<script>
+if ("serviceWorker" in navigator && /^https?:/.test(location.protocol)) {
+  addEventListener("load", function () { navigator.serviceWorker.register("sw.js").catch(function () {}); });
+}
+</script>
+</body>
+</html>

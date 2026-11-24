@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>地理学发展年表 · 高中地理知识库</title>
+<meta name="description" content="中国与世界同一条时间轴：从《禹贡》到北斗，按古代、大航海与近代、现代、当代四阶段着色，可筛选、可补充自定义事件。">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="地理知识库">
+<meta property="og:title" content="地理学发展年表 · 高中地理知识库">
+<meta property="og:description" content="中国与世界同一条时间轴：从《禹贡》到北斗，按四个历史阶段着色，可筛选与补充。">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#f2f1ea">
+<script>(function(){try{var t=localStorage.getItem("gg.theme");if(!t){t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}document.documentElement.dataset.theme=t}catch(e){}})();</script>
+<link rel="stylesheet" href="assets/css/site.css?v=20261124c">
+<link rel="stylesheet" href="assets/css/timeline.css?v=20261124c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='13' fill='%23125a70'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='serif' font-size='34' fill='%23f5fcfd'%3E%E5%9C%B0%3C/text%3E%3C/svg%3E">
+</head>
+<body class="tl-page">
+<a class="skip-link" href="#tlList">跳到时间线</a>
+
+<header class="tl-head">
+  <div class="tl-head-left">
+    <a class="page-back" href="index.html">← 知识库</a>
+    <span class="page-brand"><span class="brand-mark" aria-hidden="true">地</span>地理知识库</span>
+  </div>
+  <div class="tl-head-right">
+    <button id="addEventBtn" class="btn primary" title="添加自定义事件">＋ <span class="long">添加事件</span></button>
+    <button id="exportBtn" class="btn ghost" title="导出当前筛选结果为 CSV">导出 <span class="long">CSV</span></button>
+    <button id="themeToggle" class="theme-btn" title="切换明暗主题" aria-label="切换明暗主题">◐</button>
+  </div>
+</header>
+
+<main class="tl-wrap">
+  <section class="tl-hero">
+    <p class="tl-eyebrow">GEOGRAPHY CHRONICLE · 地理学发展</p>
+    <h1>同一条时间轴上的<em>山河与海图</em></h1>
+    <p class="tl-lede">从《禹贡》的区域分述、埃拉托色尼测算地球，到洪堡的综合考察、板块构造与北斗组网。中国与世界的事件并列在同一轴上，按四个历史阶段着色，可筛选、可补充自己的条目。</p>
+    <div class="tl-stats" id="tlStats" aria-label="事件统计"></div>
+  </section>
+
+  <section class="tl-controls" aria-label="时间线筛选">
+    <div class="tl-search">
+      <span class="search-icon" aria-hidden="true">⌕</span>
+      <input id="tlSearch" type="search" autocomplete="off" spellcheck="false" placeholder="搜事件、人物、地名、学科…" aria-label="搜索时间线">
+      <kbd>/</kbd>
+    </div>
+    <div class="tl-filter-row" id="regionRow">
+      <span class="tl-filter-label">地区</span>
+    </div>
+    <div class="tl-filter-row" id="stageRow">
+      <span class="tl-filter-label">阶段</span>
+    </div>
+  </section>
+
+  <div class="tl-summary">
+    <span><strong id="tlCount">0</strong> 条事件</span>
+    <span class="hint" id="tlHint">按年份升序 · 点“查看考点”回到对应章节</span>
+  </div>
+
+  <section class="tl-list" id="tlList" aria-label="地理学发展年表"></section>
+
+  <div class="tl-empty" id="tlEmpty" hidden>
+    <h3>没有匹配的事件</h3>
+    <p>换个关键词，或清除地区与阶段筛选。</p>
+    <button class="btn small" id="tlReset">清除全部筛选</button>
+  </div>
+</main>
+
+<div id="modalRoot" class="modal-root" hidden></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="data/content.js?v=20261124c"></script>
+<script src="data/timeline.js?v=20261124c"></script>
+<script src="assets/js/store.js?v=20261124c"></script>
+<script src="assets/js/render.js?v=20261124c"></script>
+<script src="assets/js/timeline.js?v=20261124c"></script>
+<script>
+if ("serviceWorker" in navigator && /^https?:/.test(location.protocol)) {
+  addEventListener("load", function () { navigator.serviceWorker.register("sw.js").catch(function () {}); });
+}
+</script>
+</body>
+</html>
