@@ -179,6 +179,9 @@
       (item.exam ?
         '<section class="detail-section"><h3>考法</h3><div class="exam-box">' + esc(item.exam) + '</div></section>' : '') +
 
+      (item.extend ?
+        '<section class="detail-section ext-section"><h3>细节与拓展</h3><div class="extend-box">' + esc(item.extend) + '</div></section>' : '') +
+
       examplesSection(item) +
 
       ((item.terms && item.terms.length) ?
