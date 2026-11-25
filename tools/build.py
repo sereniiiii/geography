@@ -7,6 +7,10 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import content_source as C
 import examples_source as X
+import variants_source as V
+import extensions_source as XT
+
+EXAMPLES_ALL = list(X.EXAMPLES) + list(V.VARIANTS)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TYPES = {"概念", "规律", "过程", "对比", "方法", "区域", "安全"}
@@ -70,7 +74,7 @@ def check():
     # 例题
     ex_ids = set()
     ex_items = {}
-    for ex in X.EXAMPLES:
+    for ex in EXAMPLES_ALL:
         eid = ex.get("id", "?")
         if eid in ex_ids:
             errors.append("例题 id 重复: " + eid)
@@ -92,10 +96,24 @@ def check():
             errors.append("例题缺少题干或答案: " + eid)
         ex_items.setdefault(ex["item"], []).append(eid)
 
-    # 每道例题必须挂到考点，且同一考点最多 3 道
-    for iid, lst in ex_items.items():
+    # 每条考点至少 2 道例题，且同一考点最多 3 道
+    for iid in item_ids:
+        lst = ex_items.get(iid, [])
+        if len(lst) < 2:
+            errors.append("考点例题不足 2 道: %s -> %d" % (iid, len(lst)))
         if len(lst) > 3:
             errors.append("同一考点例题过多: %s -> %d" % (iid, len(lst)))
+
+    # 拓展必须一条对一条，且不挂不存在的考点
+    for iid in item_ids:
+        ext = XT.EXTEND.get(iid)
+        if not ext:
+            errors.append("考点缺少拓展: " + iid)
+        elif len(str(ext)) > 120:
+            errors.append("拓展超长: %s -> %d/120" % (iid, len(str(ext))))
+    for iid in XT.EXTEND:
+        if iid not in item_ids:
+            errors.append("拓展挂到不存在的考点: " + iid)
 
     # 易混对照
     pair_ids = set()
@@ -142,7 +160,7 @@ def build_payload(lesson_ids, book_ids):
     items = []
     counter = {}
     ex_by_item = {}
-    for ex in X.EXAMPLES:
+    for ex in EXAMPLES_ALL:
         ex_by_item.setdefault(ex["item"], []).append(ex)
     for it in C.ITEMS:
         m = lesson_meta[it["lesson"]]
@@ -156,11 +174,15 @@ def build_payload(lesson_ids, book_ids):
             [e["title"] + " " + e["stem"] + " " + " ".join(e["ask"]) + " " + e["hint"] + " " + e["answer"] + " " + e["analysis"]
              for e in exs]
         )
+        ext = XT.EXTEND.get(it["id"]) or ""
+        row["extend"] = ext
+        if ext:
+            row["exSearch"] += " " + ext
         items.append(row)
 
     item_by_id = {it["id"]: it for it in items}
     examples = []
-    for ex in X.EXAMPLES:
+    for ex in EXAMPLES_ALL:
         row = dict(ex)
         it = item_by_id[ex["item"]]
         row["itemTitle"] = it["title"]
@@ -179,10 +201,11 @@ def build_payload(lesson_ids, book_ids):
         "meta": {
             "title": "高中地理知识库",
             "updated": "2026-11-25",
-            "note": "考点依据人教版（2019）高中地理教材目录与通行考点归纳整理；例题为按《一地·高考地理核心方法必刷100讲》（2027版）题型结构自编的同型题，不照录原书题目。",
+            "note": "考点依据人教版（2019）高中地理教材目录与通行考点归纳整理；每条配 2 道同型例题和 1 条细节与拓展，例题与拓展按《一地·高考地理核心方法必刷100讲》（2027版）题型结构自编，不照录原书题目。",
             "source": "人教版（2019）",
             "count": len(items),
             "exampleCount": len(examples),
+            "extensionCount": len(XT.EXTEND),
             "bookCount": len(books),
             "lessonCount": len(lesson_meta),
         },
@@ -214,8 +237,8 @@ def main():
              {"stages": C.STAGES, "events": C.TIMELINE})
     with open(os.path.join(ROOT, "data", "content.json"), "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, indent=1)
-    print("OK · %d 本书 / %d 课 / %d 条考点 / %d 道例题 / %d 组对照 / %d 个时间线事件"
-          % (len(C.BOOKS), payload["meta"]["lessonCount"], len(C.ITEMS), len(X.EXAMPLES), len(C.PAIRS), len(C.TIMELINE)))
+    print("OK · %d 本书 / %d 课 / %d 条考点 / %d 道例题 / %d 条拓展 / %d 组对照 / %d 个时间线事件"
+          % (len(C.BOOKS), payload["meta"]["lessonCount"], len(C.ITEMS), len(EXAMPLES_ALL), len(XT.EXTEND), len(C.PAIRS), len(C.TIMELINE)))
 
 
 if __name__ == "__main__":
