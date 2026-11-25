@@ -2,7 +2,7 @@
    sw.js —— Service Worker：主站 / 详情 / 时间线离线可用
    策略：导航请求网络优先（断网回退缓存），静态资源 stale-while-revalidate
    ============================================================ */
-const CACHE = 'gg-static-v8';
+const CACHE = 'gg-static-v9';
 const CORE = [
   './',
   './index.html',
